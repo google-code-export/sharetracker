@@ -1,0 +1,38 @@
+DROP TABLE IF EXISTS BROKERAGE;
+
+DROP TABLE IF EXISTS SHARE_BROKER;
+
+CREATE TABLE SHARE_BROKER (
+  id INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT COMMENT 'ID for each broker' ,
+  name VARCHAR(20)  NULL   COMMENT 'Name of the Broker' ,
+  description VARCHAR(45)  NULL   COMMENT 'Description about the broker'   ,
+PRIMARY KEY(id));
+
+
+
+CREATE TABLE BROKERAGE (
+  id INTEGER UNSIGNED  NOT NULL  ,
+  security_type VARCHAR(20)  NULL   COMMENT 'Equity/Comodity/F&O' ,
+  transaction_type VARCHAR(20)  NULL   COMMENT 'Buy/Sell/ShortSell' ,
+  trade_type VARCHAR(20)  NULL   COMMENT 'DayTrade/Delivery' ,
+  brokerage_charge DECIMAL(11,9)  NULL  ,
+  service_tax_charge DECIMAL(11,9)  NULL  ,
+  stt_charge DECIMAL(11,9)  NULL  ,
+  stamp_duty_charge DECIMAL(11,9)  NULL  ,
+  transaction_charge DECIMAL(11,9)  NULL    ,
+INDEX BROKERAGE_FKIndex1(id),
+  FOREIGN KEY(id)
+    REFERENCES SHARE_BROKER(id)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION);
+
+
+INSERT INTO SHARE_BROKER VALUES(1, 'Sharekhan', 'Sharekhan Stock broker');
+INSERT INTO BROKERAGE VALUES(1, 'Equity', 'Intraday', 'Buy', '0.001', '0.103', '0', '0.00002', '0.0000335');
+INSERT INTO BROKERAGE VALUES(1, 'Equity', 'Intraday', 'Sell', '0.001', '0.103', '0.00025', '0.00002', '0.0000335');
+INSERT INTO BROKERAGE VALUES(1, 'Equity', 'Delivery', 'Buy', '0.00500', '0.103', '0.00125', '0.00010', '0.0000335');
+INSERT INTO BROKERAGE VALUES(1, 'Equity', 'Delivery', 'Sell', '0.00500', '0.103', '0.00125', '0.00010', '0.0000335');
+
+select * from SHARE_BROKER ;
+select * from BROKERAGE ;
+
