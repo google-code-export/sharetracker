@@ -11,11 +11,24 @@
 
 package com.prem.share.gui;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+
+import com.ibatis.common.resources.Resources;
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import com.prem.share.dm.db.brokerage;
 import com.prem.share.dm.db.share_broker;
 import com.prem.share.dm.db.share_brokerExample;
+import com.prem.share.dm.db.dao.impl.share_brokerDAOImpl;
+import com.prem.share.dm.db.share_brokerExample.Criteria;
+
 
 /**
  *
@@ -204,11 +217,37 @@ public class TradePanel extends javax.swing.JPanel {
     // End of variables declaration
 
     public static void main(String argv[]) {
+//    	Reader rd = null;
+//		try {
+//			rd = Resources.getResourceAsReader("SqlMapConfig.xml");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//    	   SqlMapClient smc = SqlMapClientBuilder.buildSqlMapClient(rd);
+//    	   smc.q
     	share_brokerExample sb = new share_brokerExample();
-    	List ls = sb.createCriteria().andNameIsNotNull().getCriteriaWithListValue();
+    	sb.createCriteria().andNameEqualTo("Sharekhan");
+    	
+    	Resource resource = new FileSystemResource(
+    		"src/com/prem/share/dm/db/maps/spring-ibatis.xml");
+    	BeanFactory beanFactory = new XmlBeanFactory(resource);
+    	share_brokerDAOImpl share_brokerImpl = (share_brokerDAOImpl)beanFactory.getBean("share_broker");
+    	List<share_broker> ls = share_brokerImpl.selectshare_brokerByExample(sb);
+
+//    	share_brokerDAOImpl sbImpl = new share_brokerDAOImpl();
+//    	sbImpl.getSqlMapClient();
+//    	System.out.println(sbImpl.selectshare_brokerByExample(sb));
+//    	System.out.println(sbImpl.countshare_brokerByExample(sb));
+//    	share_broker sb1 = share_brokerDAOImpl.countshare_brokerByExample(sb);
+//    	List ls = ct.getCriteriaWithListValue();
+//    	List ls = sb.createCriteria().andNameIsNotNull().getCriteriaWithListValue();
     	
     	for(int i =0 ; i<ls.size(); i++) {
-    		System.out.println( ls.get(i));
+    		
+    		System.out.println("Name: " + ls.get(i).getId());
+    		System.out.println("Name: " + ls.get(i).getName());
+    		System.out.println("Name: " + ls.get(i).getDescription());
     	}
 //    	brokerage br = new brokerage();
 //    	br.set

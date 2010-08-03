@@ -16,4 +16,5 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
         </dataSource>
       </transactionManager>
      <sqlMap resource="share_broker_SqlMap.xml"/> 
+     <sqlMap resource="brokerage_SqlMap.xml"/>
 </sqlMapConfig>
