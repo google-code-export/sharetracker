@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ibatorConfiguration
+  PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN"
+  "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd">
+
+<ibatorConfiguration>
+	<ibatorContext id="ibatorContext" targetRuntime="Ibatis2Java5"
+		defaultModelType="flat">
+
+		<ibatorPlugin type="org.apache.ibatis.ibator.plugins.SerializablePlugin" />
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/share" userId="root"
+			password="root">
+		</jdbcConnection>
+
+		<javaModelGenerator targetPackage="com.prem.share.dm.db"
+			targetProject="ShareTracker">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.prem.share.dm.db.maps"
+			targetProject="ShareTracker">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<daoGenerator type="SPRING" targetPackage="com.prem.share.dm.db.dao"
+			implementationPackage="com.prem.share.dm.db.dao.impl" targetProject="ShareTracker">
+			<property name="enableSubPackages" value="true" />
+			<property name="methodNameCalculator" value="extended" />
+		</daoGenerator>
+
+		<table tableName="brokerage" domainObjectName="Brokerage" />
+		<table tableName="share_broker" domainObjectName="ShareBroker" />
+		<table tableName="script" domainObjectName="Script" />
+		<table tableName="equity_transaction" domainObjectName="EquityTransaction" />
+		
+
+	</ibatorContext>
+</ibatorConfiguration>
