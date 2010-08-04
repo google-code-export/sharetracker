@@ -48,5 +48,11 @@
     <target name="clean-build" depends="clean,jar"/>
 
     <target name="main" depends="clean,run"/>
+	
+	<target name="runIbator">
+	  <eclipse.convertPath resourcepath="ShareTracker/resource/ibatorConfig.xml" property="thePath"/>
+	  <ibator.generate configfile="${thePath}" ></ibator.generate>
+	</target>
+
 
 </project>
