@@ -11,16 +11,6 @@
 
 package com.prem.share.gui;
 
-import java.util.List;
-
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-
-import com.prem.share.dm.db.ShareBroker;
-import com.prem.share.dm.db.ShareBrokerExample;
-import com.prem.share.dm.db.dao.impl.ShareBrokerDAOImpl;
 
 
 /**
@@ -209,20 +199,20 @@ public class TradePanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField6;
     // End of variables declaration
 
-    public static void main(String argv[]) {
-    	ShareBrokerExample sb = new ShareBrokerExample();
-    	sb.createCriteria().andNameEqualTo("Sharekhan");
-    	
-    	Resource resource = new FileSystemResource(
-    		"src/com/prem/share/dm/db/maps/spring-ibatis.xml");
-    	BeanFactory beanFactory = new XmlBeanFactory(resource);
-    	ShareBrokerDAOImpl share_brokerImpl = (ShareBrokerDAOImpl)beanFactory.getBean("share_broker");
-    	List<ShareBroker> ls = share_brokerImpl.selectShareBrokerByExample(sb);
-
-    	for(int i =0 ; i<ls.size(); i++) {
-    		System.out.println("Name: " + ls.get(i).getId());
-    		System.out.println("Name: " + ls.get(i).getName());
-    		System.out.println("Name: " + ls.get(i).getDescription());
-    	}
-    }
+//    public static void main(String argv[]) {
+//    	ShareBrokerExample sb = new ShareBrokerExample();
+//    	sb.createCriteria().andNameEqualTo("Sharekhan");
+//    	
+//    	Resource resource = new FileSystemResource(
+//    		"src/com/prem/share/dm/db/maps/spring-ibatis.xml");
+//    	BeanFactory beanFactory = new XmlBeanFactory(resource);
+//    	ShareBrokerDAOImpl share_brokerImpl = (ShareBrokerDAOImpl)beanFactory.getBean("share_broker");
+//    	List<ShareBroker> ls = share_brokerImpl.selectShareBrokerByExample(sb);
+//
+//    	for(int i =0 ; i<ls.size(); i++) {
+//    		System.out.println("Name: " + ls.get(i).getId());
+//    		System.out.println("Name: " + ls.get(i).getName());
+//    		System.out.println("Name: " + ls.get(i).getDescription());
+//    	}
+//    }
 }

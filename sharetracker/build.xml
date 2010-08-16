@@ -2,18 +2,23 @@
 
     <property name="src.dir"     value="src"/>
 
-    <property name="build.dir"   value="build"/>
-    <property name="classes.dir" value="${build.dir}/classes"/>
+	<property name="resource.dir"   value="resource"/>
+	
+	<property name="build.dir"   value="build"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="${build.dir}/jar"/>
 
     <property name="main-class"  value="com.prem.share.ShareTracker"/>
 
     <property name="lib.dir"     value="lib"/>
 
-    <path id="classpath">
+	<property name="DEFAULT_KEYSTORE_PASSWORD" value="ElementSoft"/>
+	<property name="DEFAULT_KEYSTORE_ALIAS" value="ElementSoft"/>
+	<property name="DEFAULT_KEYSTORE" value="${resource.dir}/ElementSoftKey"/>
+
+	<path id="classpath">
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
     </path>
-
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -36,7 +41,12 @@
         </jar>
     </target>
 
-    <target name="run" depends="jar">
+	<target name="signJar" depends="jar">
+		<signjar storepass="${DEFAULT_KEYSTORE_PASSWORD}" alias="${DEFAULT_KEYSTORE_ALIAS}" keystore="${DEFAULT_KEYSTORE}" jar="${jar.dir}/${ant.project.name}.jar">
+		</signjar>					
+	</target>
+
+    <target name="run" depends="signJar">
         <java fork="true" classname="${main-class}">
             <classpath>
                 <path refid="classpath"/>
@@ -45,7 +55,7 @@
         </java>
     </target>
 
-    <target name="clean-build" depends="clean,jar"/>
+    <target name="clean-build" depends="clean,signJar"/>
 
     <target name="main" depends="clean,run"/>
 	
@@ -53,6 +63,5 @@
 	  <eclipse.convertPath resourcepath="ShareTracker/resource/ibatorConfig.xml" property="thePath"/>
 	  <ibator.generate configfile="${thePath}" ></ibator.generate>
 	</target>
-
 
 </project>

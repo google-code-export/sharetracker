@@ -6,6 +6,9 @@ public interface GuiConstants {
 	public static final String QUOTE = "Quote";
 	public static final String TRADE = "Trade";
 
+	// Button Name
+	public static final String GET_QUOTE = "Get Quote";
+	
 	// Quote column name
 	public static final String SCRIPT_NAME = "Name";
 	public static final String LAST_PRICE = "LTP";
