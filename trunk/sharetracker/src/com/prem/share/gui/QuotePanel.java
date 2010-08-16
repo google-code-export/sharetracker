@@ -15,7 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 
-import com.brocade.common.ui.table.BSortedTable;
 import com.prem.share.common.GuiConstants;
 import com.prem.share.common.GuiUtil;
 import com.prem.share.common.NseShareConstant;
@@ -41,8 +40,6 @@ public class QuotePanel extends JPanel {
 		model = new QuoteTableModel();
 		model.setColHeaders();
 		
-		BSortedTable bTable = new BSortedTable();
-		
 		quoteTable = new JTable(model);
 		quoteTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 		JScrollPane scrollPane = new JScrollPane(quoteTable);
@@ -65,7 +62,7 @@ public class QuotePanel extends JPanel {
 		
 		JPanel scriptActionPanel = new JPanel();
 		scriptName = new JTextField(20);
-		JButton addButton = new JButton("Add Quote");
+		JButton addButton = new JButton(GuiConstants.GET_QUOTE);
 		addButton.addActionListener(new AddActionListener());
 		scriptActionPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		scriptActionPanel.add(scriptName);
