@@ -62,7 +62,7 @@ public class QuotePanel extends JPanel {
 		
 		JPanel scriptActionPanel = new JPanel();
 		scriptName = new JTextField(20);
-		JButton addButton = new JButton(GuiConstants.GET_QUOTE);
+		JButton addButton = new JButton(GuiConstants.ADD_QUOTE);
 		addButton.addActionListener(new AddActionListener());
 		scriptActionPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		scriptActionPanel.add(scriptName);
@@ -182,12 +182,14 @@ public class QuotePanel extends JPanel {
 		private void setColHeaders() {
 			colHeaders.add(SCRIPT_NAME);
 			colHeaders.add(LAST_PRICE);
-			colHeaders.add(CHANGE);
-			colHeaders.add(CHANGE_PERCENTAGE);
-			colHeaders.add(OPEN);
-			colHeaders.add(HIGH);
-			colHeaders.add(LOW);
+			colHeaders.add(CHANGE_WITH_PERCENTAGE);
+//			colHeaders.add(CHANGE_PERCENTAGE);
 			colHeaders.add(PREVIOUS_CLOSE);
+			colHeaders.add(OPEN);
+			colHeaders.add(DAY_H_L);
+			colHeaders.add(W52_H_L);
+//			colHeaders.add(HIGH);
+//			colHeaders.add(LOW);
 			colHeaders.add(DATA_AS_ON);
 		}
 
@@ -219,6 +221,8 @@ public class QuotePanel extends JPanel {
 					value = quote.getScriptChange();
 				} else if (colName.equals(CHANGE_PERCENTAGE)) {
 					value = quote.getScriptChangePercentage();
+				} else if (colName.equals(CHANGE_WITH_PERCENTAGE)) {
+					value = quote.getScriptChange() + " (" + quote.getScriptChangePercentage() + ")";
 				} else if (colName.equals(OPEN)) {
 					value = quote.getScriptDayOpen();
 				} else if (colName.equals(HIGH)) {
@@ -229,6 +233,10 @@ public class QuotePanel extends JPanel {
 					value = quote.getScriptClosePrice();
 				} else if (colName.equals(DATA_AS_ON)) {
 					value = quote.getScriptDataAsOn();
+				} else if (colName.equals(W52_H_L)) {
+					value = quote.getScript52WL() + " - " + quote.getScript52WH();
+				} else if (colName.equals(DAY_H_L)) {
+					value = quote.getScriptDayLow() + " - " + quote.getScriptDayHigh();
 				}
 			}
 			return value;
