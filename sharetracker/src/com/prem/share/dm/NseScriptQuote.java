@@ -213,7 +213,7 @@ public class NseScriptQuote implements ScriptQuote {
     public boolean equals(Object obj) {
     	boolean equal = false;
     	if(obj != null && obj instanceof NseScriptQuote) {
-    		equal = ((NseScriptQuote)obj).getScriptName().equals(this.getScriptName());	
+    		equal = ((NseScriptQuote)obj).getScriptName().equalsIgnoreCase(this.getScriptName());	
     	}
     	return equal;
     }
