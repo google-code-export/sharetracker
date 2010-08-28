@@ -8,7 +8,7 @@ public class NseScriptQuote implements ScriptQuote {
 	String[] data = NseShareConstant.DUMMNY_DATA;
 
 	public NseScriptQuote(String scriptName) {
-		new NseScriptQuote(scriptName, false);
+		this(scriptName, false);
 	}
 
 	public NseScriptQuote(String scriptName, boolean refresh) {

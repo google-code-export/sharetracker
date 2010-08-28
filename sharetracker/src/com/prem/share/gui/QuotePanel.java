@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 
@@ -46,6 +47,7 @@ public class QuotePanel extends JPanel {
 		// scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		// scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		quoteTable.setFillsViewportHeight(true);
+		quoteTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		// End of init Center Panel
 
 		// Init North Panel
@@ -64,9 +66,12 @@ public class QuotePanel extends JPanel {
 		scriptName = new JTextField(20);
 		JButton addButton = new JButton(GuiConstants.ADD_QUOTE);
 		addButton.addActionListener(new AddActionListener());
+		JButton deleteButton = new JButton(GuiConstants.DELETE_QUOTE);
+		deleteButton.addActionListener(new DeleteActionListener());
 		scriptActionPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		scriptActionPanel.add(scriptName);
 		scriptActionPanel.add(addButton);
+		scriptActionPanel.add(deleteButton);
 		
 		northPanel.add(actionPanel, BorderLayout.EAST);
 		northPanel.add(scriptActionPanel, BorderLayout.CENTER);
@@ -162,6 +167,25 @@ public class QuotePanel extends JPanel {
 					};
 					worker.execute();
 				}
+			}
+		}
+	}
+
+	private class DeleteActionListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			int selectedRow = quoteTable.getSelectedRow();
+			if (selectedRow != -1) {
+				int nameColumnPosition = quoteTable.getColumnModel().getColumnIndex(GuiConstants.SCRIPT_NAME);
+				int selectedrows[] = quoteTable.getSelectedRows();
+				for (int i = 0; i < selectedrows.length; i++) {
+					String scriptName = (String)quoteTable.getValueAt(selectedrows[i], nameColumnPosition);
+					model.quoteModel.remove(new NseScriptQuote(scriptName));
+				}
+				model.fireTableDataChanged();
+			}	
+			else {
+				//TODO: Show information message
 			}
 		}
 	}

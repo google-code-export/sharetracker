@@ -8,6 +8,7 @@ public interface GuiConstants {
 
 	// Button Name
 	public static final String ADD_QUOTE = "Add Quote";
+	public static final String DELETE_QUOTE = "Delete Quote";
 	
 	// Quote column name
 	public static final String SCRIPT_NAME = "Name";
