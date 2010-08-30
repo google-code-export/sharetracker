@@ -24,6 +24,6 @@ public interface GuiConstants {
 	public static final String PREVIOUS_CLOSE = "Prev Close";
 	public static final String DATA_AS_ON = "Data As On";
 
-	public static final String SHARE = "Share";
+	public static final String SHARE = "Share Tracker";
 	public static final String REFRESH = "Refresh";
 }
