@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,6 +18,7 @@ import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 
 import com.prem.share.common.GuiConstants;
+import com.prem.share.common.GuiMessage;
 import com.prem.share.common.GuiUtil;
 import com.prem.share.common.NseShareConstant;
 import com.prem.share.dm.NseScriptQuote;
@@ -47,7 +49,7 @@ public class QuotePanel extends JPanel {
 		// scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		// scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		quoteTable.setFillsViewportHeight(true);
-		quoteTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		quoteTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		// End of init Center Panel
 
 		// Init North Panel
@@ -167,6 +169,9 @@ public class QuotePanel extends JPanel {
 					};
 					worker.execute();
 				}
+				else {
+					GuiMessage.informationMessage(QuotePanel.this, GuiMessage.ADD_DUPLICATE);
+				}
 			}
 		}
 	}
@@ -176,16 +181,22 @@ public class QuotePanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			int selectedRow = quoteTable.getSelectedRow();
 			if (selectedRow != -1) {
-				int nameColumnPosition = quoteTable.getColumnModel().getColumnIndex(GuiConstants.SCRIPT_NAME);
-				int selectedrows[] = quoteTable.getSelectedRows();
-				for (int i = 0; i < selectedrows.length; i++) {
-					String scriptName = (String)quoteTable.getValueAt(selectedrows[i], nameColumnPosition);
-					model.quoteModel.remove(new NseScriptQuote(scriptName));
+				int confirmation = GuiMessage.confirmationMessage(QuotePanel.this, GuiMessage.DELETE_QUOTE);
+				if(confirmation == JOptionPane.OK_OPTION) {
+					int nameColumnPosition = quoteTable.getColumnModel().getColumnIndex(GuiConstants.SCRIPT_NAME);
+					ArrayList<NseScriptQuote> scriptsToDelete = new ArrayList<NseScriptQuote>();
+					for (int selectedrows: quoteTable.getSelectedRows()) {
+						System.out.println("Trying to delete row: " + selectedrows);
+						String scriptName = (String)quoteTable.getValueAt(selectedrows, nameColumnPosition);
+						System.out.println("Trying to delete Script: " + scriptName);
+						scriptsToDelete.add(new NseScriptQuote(scriptName));
+					}
+					model.quoteModel.removeAll(scriptsToDelete);
+					model.fireTableDataChanged();
 				}
-				model.fireTableDataChanged();
-			}	
+			}
 			else {
-				//TODO: Show information message
+				GuiMessage.informationMessage(QuotePanel.this, GuiMessage.NO_SELECTION);
 			}
 		}
 	}
