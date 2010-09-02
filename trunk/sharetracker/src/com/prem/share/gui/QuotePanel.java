@@ -21,6 +21,7 @@ import com.prem.share.common.GuiConstants;
 import com.prem.share.common.GuiMessage;
 import com.prem.share.common.GuiUtil;
 import com.prem.share.common.NseShareConstant;
+import com.prem.share.common.StStatusBar;
 import com.prem.share.dm.NseScriptQuote;
 import com.prem.share.dm.ScriptQuote;
 
@@ -33,6 +34,7 @@ public class QuotePanel extends JPanel {
 	JButton refreshButton = null;
 	QuoteTableModel model = null;
 	JTextField scriptName = null;
+	StStatusBar statusBar = ShareWindow.getStatusBar();
 
 	public QuotePanel() {
 		init();
@@ -87,14 +89,22 @@ public class QuotePanel extends JPanel {
 			protected Object doInBackground() throws Exception {
 				setRefreshIcon();
 				ScriptQuote quote1 = new NseScriptQuote(
-						NseShareConstant.NSE_JPINFRATEC, true);
-				model.add(quote1);
+						NseShareConstant.NSE_JPINFRATEC, false);
 				ScriptQuote quote2 = new NseScriptQuote(
-						NseShareConstant.NSE_FORTIS, true);
-				model.add(quote2);
+						NseShareConstant.NSE_FORTIS, false);
 				ScriptQuote quote3 = new NseScriptQuote(
-						NseShareConstant.NSE_RNRL, true);
+						NseShareConstant.NSE_RNRL, false);
+				ScriptQuote quote4 = new NseScriptQuote(
+						NseShareConstant.NSE_AQUA, false);
+				model.add(quote1);
+				model.add(quote2);
 				model.add(quote3);
+				model.add(quote4);
+				model.fireTableDataChanged();
+				refresh(quote1);
+				refresh(quote2);
+				refresh(quote3);
+				refresh(quote4);
 				return null;
 			}
 
@@ -105,8 +115,6 @@ public class QuotePanel extends JPanel {
 		};
 		worker.execute();
 	}
-	
-	
 
 	private void setRefreshIcon() {
 		refreshButton.setText("");
@@ -125,6 +133,12 @@ public class QuotePanel extends JPanel {
 		refreshButton.setText(GuiConstants.REFRESH);
 	}
 
+	private void refresh(ScriptQuote quote) {
+		statusBar.displayMessage(GuiMessage.REFRESH_QUOTE + quote.getScriptName());
+		quote.refresh();
+		statusBar.displayMessage("");
+	}
+	
 	private class RefreshActionListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -133,7 +147,7 @@ public class QuotePanel extends JPanel {
 					setRefreshIcon();
 					int quoteListSize = model.quoteModel.size();
 					for (int i = 0; i < quoteListSize; i++) {
-						model.quoteModel.get(i).refresh();
+						refresh(model.quoteModel.get(i));
 					}
 					return null;
 				}
@@ -159,7 +173,7 @@ public class QuotePanel extends JPanel {
 				
 					SwingWorker worker = new SwingWorker() {
 						protected Object doInBackground() throws Exception {
-							newQuote.refresh();						
+							refresh(newQuote);						
 							return null;
 						}
 		
