@@ -32,6 +32,7 @@ public interface NseShareConstant {
 	public static final String NSE_JPHYDRO = "JPPOWER";
 	public static final String NSE_SATYAM = "SATYAMCOMP";
 	public static final String NSE_RNRL = "RNRL";
+	public static final String NSE_AQUA = "AQUA";
 	public static final String NSE_FORTIS = "FORTIS";
 	public static final String NSE_JPINFRATEC = "JPINFRATEC";
 

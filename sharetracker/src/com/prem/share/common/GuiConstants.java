@@ -26,4 +26,11 @@ public interface GuiConstants {
 
 	public static final String SHARE = "Share Tracker";
 	public static final String REFRESH = "Refresh";
+	
+	//Menu Items
+	public static final String FILE = "File";
+	public static final String HELP = "Help";
+	public static final String ABOUT = "About";
+	public static final String EXIT = "Exit";
+	
 }

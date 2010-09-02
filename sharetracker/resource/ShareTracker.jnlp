@@ -6,7 +6,7 @@
     <vendor>ElementSoft</vendor>
     <homepage href="http://sharetracker.googlecode.com"/>
     <description>Share Tracker</description>
-    <icon href="splash_st.gif" kind="splash"/>
+    <!--<icon href="splash_st.gif" kind="splash"/> -->
     <offline-allowed/>
   </information>
   <security>
@@ -14,7 +14,7 @@
   </security>
   <update check="timeout" policy="always"/>
   <resources>
-    <java initial-heap-size="67108864" max-heap-size="536870912" version="1.6+"/>
+    <java java-vm-args="-splash:resource/images/splash_st.gif" initial-heap-size="67108864" max-heap-size="536870912" version="1.6+"/>
     <jar href="http://sharetracker.googlecode.com/files/ShareTracker.jar" download="eager" main="false"/>
   </resources>
   <application-desc main-class="com.prem.share.ShareTracker"/>

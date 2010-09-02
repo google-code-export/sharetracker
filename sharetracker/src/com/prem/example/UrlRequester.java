@@ -1,4 +1,4 @@
-package com.prem.share.common;
+package com.prem.example;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

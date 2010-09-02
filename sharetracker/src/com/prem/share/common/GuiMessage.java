@@ -10,6 +10,8 @@ public final class GuiMessage {
 	public static String DELETE_QUOTE = "Selected quotes will be deleted from the list\nDo you want to continue?";
 	public static String NO_SELECTION = "Select quotes from the list";
 	
+	public static String REFRESH_QUOTE = "Refreshing quote: ";
+	
 	public static void informationMessage (Component parentComponent, String message) {
 		JOptionPane.showMessageDialog(parentComponent, message, GuiConstants.SHARE, JOptionPane.INFORMATION_MESSAGE);
 	}
