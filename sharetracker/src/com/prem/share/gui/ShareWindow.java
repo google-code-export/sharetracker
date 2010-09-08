@@ -14,7 +14,6 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import com.prem.share.ShareTracker;
 import com.prem.share.common.GuiConstants;
 import com.prem.share.common.GuiUtil;
 import com.prem.share.common.StStatusBar;
@@ -63,7 +62,9 @@ public class ShareWindow extends JFrame implements GuiConstants {
         aboutMenu.addActionListener( new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ShareTracker.displaySplashScreen();
+//				ShareTracker.displaySplashScreen();
+				AboutDialog about = new AboutDialog(ShareWindow.this);
+				about.setVisible(true);
 			}
         });
         
