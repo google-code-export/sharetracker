@@ -2,6 +2,19 @@ package com.prem.share.common;
 
 public interface GuiConstants {
 
+	// Version
+	public static final String PRODUCT_LABEL = "Product";
+	public static final String VERSION_LABEL = "Version";
+	public static final String COPYRIGHT_LABEL = "Copyright";
+	public static final String AUTHER_LABEL = "Author";
+	public static final String COMMENTS_LABEL = "Comment";
+	
+	public static final String PRODUCT = "Share Tracker";
+	public static final String VERSION = "1.0";
+	public static final String COPYRIGHT = "GPL";
+	public static final String AUTHER = "Premkumar Nandagopal";
+	public static final String COMMENTS = "";
+    
 	// Tab Name
 	public static final String QUOTE = "Quote";
 	public static final String TRADE = "Trade";
