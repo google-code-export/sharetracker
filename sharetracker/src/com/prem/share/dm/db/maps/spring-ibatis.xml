@@ -24,7 +24,7 @@
     </bean>
 
     <bean id="share_broker" 
-    class="com.prem.share.dm.db.dao.impl.share_brokerDAOImpl">
+    class="com.prem.share.dm.db.dao.impl.ShareBrokerDAOImpl">
         <property name="dataSource"><ref local="dataSource"/></property>
         <property name="sqlMapClient"><ref local="sqlMapClient"/></property>
     </bean>

@@ -22,6 +22,8 @@ public interface GuiConstants {
 	// Button Name
 	public static final String ADD_QUOTE = "Add Quote";
 	public static final String DELETE_QUOTE = "Delete Quote";
+	public static final String BROWSE = "Browse";
+	public static final String SAVE_TO_DB = "Save to DB";
 	
 	// Quote column name
 	public static final String SCRIPT_NAME = "Name";
@@ -32,11 +34,28 @@ public interface GuiConstants {
 	public static final String OPEN = "Open";
 	public static final String HIGH = "High";
 	public static final String LOW = "Low";
-	public static final String DAY_H_L = "Day H - L";
-	public static final String W52_H_L = "52W H - L";
+	public static final String DAY_H_L = "Day L - H";
+	public static final String W52_H_L = "52W L - H";
 	public static final String PREVIOUS_CLOSE = "Prev Close";
 	public static final String DATA_AS_ON = "Data As On";
 
+	// Transaction column name
+	public static final String companyName = "Company Name";
+	public static final String shareKhanCode = "Sharekhan Code";
+	public static final String transaction = "Transaction";
+	public static final String nseCode = "NSE Code";
+	public static final String quantityBought = "Quantity bought";
+	public static final String quantitySold = "Quantity Sold";
+	public static final String ratePerShare = "Rate per share";
+	public static final String totalCost = "Total cost";
+	public static final String brokerageTotal = "Brokerage total";
+	public static final String serviceTax = "Service Tax";
+	public static final String stt = "STT";
+	public static final String amount = "Amount";
+	public static final String clientCode = "Client Code";
+	public static final String contractNumber = "Contract Number";
+	public static final String tradeDate = "Trade Date";
+	
 	public static final String SHARE = "Share Tracker";
 	public static final String REFRESH = "Refresh";
 	

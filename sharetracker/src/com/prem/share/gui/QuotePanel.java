@@ -5,7 +5,16 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Properties;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -88,23 +97,44 @@ public class QuotePanel extends JPanel {
 		SwingWorker worker = new SwingWorker() {
 			protected Object doInBackground() throws Exception {
 				setRefreshIcon();
-				ScriptQuote quote1 = new NseScriptQuote(
-						NseShareConstant.NSE_JPINFRATEC, false);
-				ScriptQuote quote2 = new NseScriptQuote(
-						NseShareConstant.NSE_FORTIS, false);
-				ScriptQuote quote3 = new NseScriptQuote(
-						NseShareConstant.NSE_RNRL, false);
-				ScriptQuote quote4 = new NseScriptQuote(
-						NseShareConstant.NSE_AQUA, false);
-				model.add(quote1);
-				model.add(quote2);
-				model.add(quote3);
-				model.add(quote4);
+				Properties share = new Properties();
+				File f = new File("script.txt");
+				String quoteName[] = null;
+				if(f.exists()) {
+					InputStreamReader io = new FileReader(f); 
+					share.load(io);
+					System.out.println(share);
+					Enumeration enuma = share.keys();
+					
+					quoteName = new String[share.size()];
+					int i = 0;
+					while(enuma.hasMoreElements()) {
+						String script = (String) enuma.nextElement();
+						quoteName[i++] = script; 
+					}
+				}
+				else {
+					String quoteNameTemp[] = {NseShareConstant.NSE_JPINFRATEC,
+						NseShareConstant.NSE_FORTIS,
+						NseShareConstant.NSE_RNRL,
+						NseShareConstant.NSE_AQUA,
+						NseShareConstant.NSE_SBIN
+						};
+					quoteName = quoteNameTemp;
+				}
+				Set<NseScriptQuote> quote = new HashSet<NseScriptQuote>();
+				
+				for (int i = 0; i < quoteName.length; i++) {
+					NseScriptQuote nseQuote = new NseScriptQuote(quoteName[i]);
+					quote.add(nseQuote);
+					model.add(nseQuote);
+				}
 				model.fireTableDataChanged();
-				refresh(quote1);
-				refresh(quote2);
-				refresh(quote3);
-				refresh(quote4);
+				Iterator iter = quote.iterator();
+				while (iter.hasNext()) {
+					refresh((ScriptQuote)iter.next());
+					model.fireTableDataChanged();
+				} 
 				return null;
 			}
 
@@ -148,6 +178,7 @@ public class QuotePanel extends JPanel {
 					int quoteListSize = model.quoteModel.size();
 					for (int i = 0; i < quoteListSize; i++) {
 						refresh(model.quoteModel.get(i));
+						model.fireTableDataChanged();
 					}
 					return null;
 				}
