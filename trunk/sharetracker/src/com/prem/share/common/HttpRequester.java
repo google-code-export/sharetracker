@@ -3,15 +3,27 @@ package com.prem.share.common;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
+import java.util.Map;
 
 public class HttpRequester {
+	HttpURLConnection conn = null;
+	URL url = null;
 
-	public static String getRequest(URL url) {
+	public HttpRequester(URL url, Map<String, String> headers)
+			throws IOException {
+		conn = getRequestConnection(url);
+		if (headers != null) {
+			for (Map.Entry<String, String> header : headers.entrySet()) {
+				setHeader(header.getKey(), header.getValue());
+			}
+		}
+	}
+
+	public String getRequest() {
 		StringBuilder data = new StringBuilder("");
 		try {
-			URLConnection conn = url.openConnection();
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn
 					.getInputStream()));
 			String line;
@@ -25,5 +37,29 @@ public class HttpRequester {
 			ioe.printStackTrace();
 		}
 		return data.toString();
+	}
+
+	public void setHeader(String name, String value) {
+		conn.setRequestProperty(name, value);
+	}
+
+	protected HttpURLConnection getRequestConnection(URL requestUrl)
+			throws IOException {
+
+		if (!requestUrl.getProtocol().startsWith("http")) {
+			throw new UnsupportedOperationException("Unsupported scheme:"
+					+ requestUrl.getProtocol());
+		}
+
+		HttpURLConnection huc = (HttpURLConnection) requestUrl.openConnection();
+
+		// Should never cache requests/responses
+		huc.setUseCaches(false);
+		huc.setDefaultUseCaches(false);
+
+		// Don't follow HTTP redirects
+		huc.setInstanceFollowRedirects(false);
+
+		return huc;
 	}
 }

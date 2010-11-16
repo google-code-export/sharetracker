@@ -35,5 +35,6 @@ public interface NseShareConstant {
 	public static final String NSE_AQUA = "AQUA";
 	public static final String NSE_FORTIS = "FORTIS";
 	public static final String NSE_JPINFRATEC = "JPINFRATEC";
+	public static final String NSE_SBIN = "SBIN";
 
 }

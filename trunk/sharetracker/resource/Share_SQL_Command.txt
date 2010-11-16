@@ -2,9 +2,9 @@ DROP TABLE IF EXISTS BROKERAGE;
 
 DROP TABLE IF EXISTS SHARE_BROKER;
 
-DROP TABLE IF EXISTS SCRIPT;
-
 DROP TABLE IF EXISTS EQUITY_TRANSACTION;
+
+DROP TABLE IF EXISTS SCRIPT;
 
 CREATE TABLE SHARE_BROKER (
   id INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT COMMENT 'ID for each broker' ,
@@ -41,8 +41,6 @@ CREATE TABLE SCRIPT (
 PRIMARY KEY(script_id));
 
 
-
-
 CREATE TABLE EQUITY_TRANSACTION (
   transaction_id INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   SCRIPT_script_ID VARCHAR(20)  NOT NULL  ,
@@ -50,17 +48,18 @@ CREATE TABLE EQUITY_TRANSACTION (
   transaction_date DATE  NULL  ,
   quantity INTEGER UNSIGNED  NOT NULL  ,
   price DECIMAL(7,2)  NOT NULL  ,
-  market_buy_value DECIMAL(9,2)  NOT NULL  ,
+  market_value DECIMAL(9,2)  NOT NULL  ,
   extra_charges DECIMAL(7,2)  NOT NULL  ,
-  actual_buy_value DECIMAL(9,2)  NOT NULL  ,
-  script_status VARCHAR(10)  NULL    ,
+  actual_value DECIMAL(9,2)  NOT NULL  ,
+  script_status VARCHAR(10)  NULL  ,
+  contract_no INTEGER UNSIGNED  NULL  ,
+  client_code VARCHAR(10)  NULL    ,
 PRIMARY KEY(transaction_id)  ,
 INDEX Equity_Transaction_FKIndex1(SCRIPT_script_ID),
   FOREIGN KEY(SCRIPT_script_ID)
     REFERENCES SCRIPT(script_ID)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION);
-
 
 INSERT INTO SHARE_BROKER VALUES(1, 'Sharekhan', 'Sharekhan Stock broker');
 
