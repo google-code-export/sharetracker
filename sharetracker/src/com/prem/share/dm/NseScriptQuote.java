@@ -1,6 +1,7 @@
 package com.prem.share.dm;
 
 import com.prem.share.common.NseShareConstant;
+import com.prem.share.common.ScriptUtil;
 
 public class NseScriptQuote implements ScriptQuote {
 
@@ -20,43 +21,27 @@ public class NseScriptQuote implements ScriptQuote {
 
 	@Override
 	public double getScript52WH() {
-		return Double.parseDouble(data[NseShareConstant.SCRIPT_52_WEEK_HIGH]);
+		return ScriptUtil.safeDoubleParser(data[NseShareConstant.SCRIPT_52_WEEK_HIGH]);
 	}
 
 	@Override
 	public double getScript52WL() {
-		return Double.parseDouble(data[NseShareConstant.SCRIPT_52_WEEK_LOW]);
+		return ScriptUtil.safeDoubleParser(data[NseShareConstant.SCRIPT_52_WEEK_LOW]);
 	}
 
 	@Override
 	public double getScriptChange() {
-		String change = data[NseShareConstant.SCRIPT_CHANGE];
-		if ("-".equals(change)) {
-			change = "0";
-		}
-		return Double.parseDouble(change);
+		return ScriptUtil.safeDoubleParser(data[NseShareConstant.SCRIPT_CHANGE]);
 	}
 
 	@Override
 	public double getScriptChangePercentage() {
-		String closePrice = data[NseShareConstant.SCRIPT_CHANGE_PERCENTAGE];
-		double value = 0.0;
-		if (!closePrice.trim().equalsIgnoreCase("-")) {
-			value = Double
-					.parseDouble(data[NseShareConstant.SCRIPT_CHANGE_PERCENTAGE]);
-		}
-		return value;
+		return ScriptUtil.safeDoubleParser (data[NseShareConstant.SCRIPT_CHANGE_PERCENTAGE]);
 	}
 
 	@Override
 	public double getScriptClosePrice() {
-		String closePrice = data[NseShareConstant.SCRIPT_CLOSE_PRICE];
-		double value = 0.0;
-		if (!closePrice.trim().equalsIgnoreCase("-")) {
-			value = Double
-					.parseDouble(data[NseShareConstant.SCRIPT_CLOSE_PRICE]);
-		}
-		return value;
+		return ScriptUtil.safeDoubleParser(data[NseShareConstant.SCRIPT_CLOSE_PRICE]);
 	}
 
 	@Override
@@ -71,28 +56,22 @@ public class NseScriptQuote implements ScriptQuote {
 
 	@Override
 	public double getScriptDayHigh() {
-		return Double.parseDouble(data[NseShareConstant.SCRIPT_DAY_HIGH]);
+		return ScriptUtil.safeDoubleParser(data[NseShareConstant.SCRIPT_DAY_HIGH]);
 	}
 
 	@Override
 	public double getScriptDayLow() {
-		return Double.parseDouble(data[NseShareConstant.SCRIPT_DAY_LOW]);
+		return ScriptUtil.safeDoubleParser(data[NseShareConstant.SCRIPT_DAY_LOW]);
 	}
 
 	@Override
 	public double getScriptDayOpen() {
-		return Double.parseDouble(data[NseShareConstant.SCRIPT_DAY_OPEN]);
+		return ScriptUtil.safeDoubleParser(data[NseShareConstant.SCRIPT_DAY_OPEN]);
 	}
 
 	@Override
 	public double getScriptLastPrice() {
-		String closePrice = data[NseShareConstant.SCRIPT_LAST_PRICE];
-		double value = 0.0;
-		if (!closePrice.trim().equalsIgnoreCase("-")) {
-			value = Double
-					.parseDouble(data[NseShareConstant.SCRIPT_LAST_PRICE]);
-		}
-		return value;
+		return ScriptUtil.safeDoubleParser(data[NseShareConstant.SCRIPT_LAST_PRICE]);
 	}
 
 	@Override
@@ -102,7 +81,7 @@ public class NseScriptQuote implements ScriptQuote {
 
 	@Override
 	public double getScriptPreviousClose() {
-		return Double.parseDouble(data[NseShareConstant.SCRIPT_PREVIOUS_CLOSE]);
+		return ScriptUtil.safeDoubleParser(data[NseShareConstant.SCRIPT_PREVIOUS_CLOSE]);
 	}
 
 	@Override
@@ -217,5 +196,4 @@ public class NseScriptQuote implements ScriptQuote {
     	}
     	return equal;
     }
-
 }
