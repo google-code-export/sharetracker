@@ -135,7 +135,7 @@ public class TradePanel extends javax.swing.JPanel {
 				HashSet<Transaction> transactions = parser.parse(scriptName.getText());
 				Iterator<Transaction> iter = transactions.iterator();
 				while (iter.hasNext()) {
-					Transaction transaction = (Transaction) iter.next();
+					Transaction transaction = iter.next();
 					transaction.setTransactionType(transaction.getTranType().toString());
 					model.add(transaction);
 				}
@@ -186,14 +186,16 @@ public class TradePanel extends javax.swing.JPanel {
 			colHeaders.add(tradeDate);
 		}
 
+		@Override
 		public void setValueAt(Object value, int row, int col) {
-			Transaction transaction = (Transaction) transactionModel.get(row);
+			Transaction transaction = transactionModel.get(row);
 	        transaction.setScriptScriptId((String)value);
 	        fireTableCellUpdated(row, col);
 	    }
 		
+		@Override
 		public String getColumnName(int col) {
-			return (String) colHeaders.get(col);
+			return colHeaders.get(col);
 		}
 
 		@Override
@@ -221,8 +223,8 @@ public class TradePanel extends javax.swing.JPanel {
 		public Object getValueAt(int row, int col) {
 			Object value = null;
 			if (row < transactionModel.size()) {
-				Transaction transaction = (Transaction) transactionModel.get(row);
-				String colName = (String) colHeaders.get(col);
+				Transaction transaction = transactionModel.get(row);
+				String colName = colHeaders.get(col);
 				if (colName.equals(companyName)) {
 					value = transaction.getCompanyName();
 				} else if (colName.equals(shareKhanCode)) {

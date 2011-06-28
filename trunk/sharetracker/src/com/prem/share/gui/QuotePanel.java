@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -95,6 +94,7 @@ public class QuotePanel extends JPanel {
 		this.add(northPanel, BorderLayout.NORTH);
 		this.setVisible(true);
 		SwingWorker worker = new SwingWorker() {
+			@Override
 			protected Object doInBackground() throws Exception {
 				setRefreshIcon();
 				Properties share = new Properties();
@@ -138,6 +138,7 @@ public class QuotePanel extends JPanel {
 				return null;
 			}
 
+			@Override
 			public void done() {
 				resetRefreshIconToText();
 				model.fireTableDataChanged();
@@ -173,6 +174,7 @@ public class QuotePanel extends JPanel {
 
 		public void actionPerformed(ActionEvent e) {
 			SwingWorker worker = new SwingWorker() {
+				@Override
 				protected Object doInBackground() throws Exception {
 					setRefreshIcon();
 					int quoteListSize = model.quoteModel.size();
@@ -183,6 +185,7 @@ public class QuotePanel extends JPanel {
 					return null;
 				}
 
+				@Override
 				public void done() {
 					resetRefreshIconToText();
 					model.fireTableDataChanged();
@@ -203,11 +206,13 @@ public class QuotePanel extends JPanel {
 					model.fireTableDataChanged();
 				
 					SwingWorker worker = new SwingWorker() {
+						@Override
 						protected Object doInBackground() throws Exception {
 							refresh(newQuote);						
 							return null;
 						}
 		
+						@Override
 						public void done() {
 							model.fireTableDataChanged();
 						}
@@ -273,8 +278,9 @@ public class QuotePanel extends JPanel {
 			colHeaders.add(DATA_AS_ON);
 		}
 
+		@Override
 		public String getColumnName(int col) {
-			return (String) colHeaders.get(col);
+			return colHeaders.get(col);
 		}
 
 		@Override
@@ -291,8 +297,8 @@ public class QuotePanel extends JPanel {
 		public Object getValueAt(int row, int col) {
 			Object value = null;
 			if (row < quoteModel.size()) {
-				ScriptQuote quote = (ScriptQuote) quoteModel.get(row);
-				String colName = (String) colHeaders.get(col);
+				ScriptQuote quote = quoteModel.get(row);
+				String colName = colHeaders.get(col);
 				if (colName.equals(SCRIPT_NAME)) {
 					value = quote.getScriptName();
 				} else if (colName.equals(LAST_PRICE)) {

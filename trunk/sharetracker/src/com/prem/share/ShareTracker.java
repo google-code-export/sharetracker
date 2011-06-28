@@ -17,7 +17,7 @@ public class ShareTracker {
 		final SplashScreen splash = SplashScreen.getSplashScreen();
 		if (splash != null) {
             System.out.println("SplashScreen.getSplashScreen() returned null");
-            Graphics2D g = (Graphics2D)splash.createGraphics();
+            Graphics2D g = splash.createGraphics();
             try {
             	Thread.sleep(3000);
             }

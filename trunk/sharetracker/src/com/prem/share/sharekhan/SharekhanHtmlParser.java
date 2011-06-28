@@ -40,7 +40,7 @@ public class SharekhanHtmlParser {
 		}
 		Iterator< Transaction> trans = transactions.iterator();
 		while (trans.hasNext()) {
-			Transaction transaction = (Transaction) trans.next();
+			Transaction transaction = trans.next();
 			transactionDate.trim();
 			String[] dateArray = transactionDate.split("/");
 			Date d = new Date(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[0]));
@@ -63,6 +63,7 @@ public class SharekhanHtmlParser {
 		public SharekhanCallbackHandler() {
 		}
 
+		@Override
 		public void handleText(char[] data, int pos) {
 			String text = (new String(data)).trim();
 			if (text.equals("Contract Note No")) {
@@ -171,10 +172,12 @@ public class SharekhanHtmlParser {
 			}
 		}
 		
+		@Override
 		public void handleStartTag(HTML.Tag t, MutableAttributeSet a, int pos) {
 			
 		}
 
+		@Override
 		public void handleEndTag(HTML.Tag t, int pos) {
 			if (transactionStart && t.equals(HTML.Tag.TR)) {
 				transactionStart = false;
