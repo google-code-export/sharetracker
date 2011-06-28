@@ -1,6 +1,15 @@
 package com.prem.example;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Graphics2D;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
+import java.awt.SplashScreen;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SplashTest extends Frame implements ActionListener {
     static void renderSplashFrame(Graphics2D g, int frame) {
@@ -29,7 +38,7 @@ public class SplashTest extends Frame implements ActionListener {
             System.out.println("SplashScreen.getSplashScreen() returned null");
             return;
         }
-        Graphics2D g = (Graphics2D)splash.createGraphics();
+        Graphics2D g = splash.createGraphics();
         if (g == null) {
             System.out.println("g is null");
             return;

@@ -189,7 +189,8 @@ public class NseScriptQuote implements ScriptQuote {
 		data = NseQuoteParser.getQuote(getScriptName());
 	}
 
-    public boolean equals(Object obj) {
+    @Override
+	public boolean equals(Object obj) {
     	boolean equal = false;
     	if(obj != null && obj instanceof NseScriptQuote) {
     		equal = ((NseScriptQuote)obj).getScriptName().equalsIgnoreCase(this.getScriptName());	
