@@ -42,6 +42,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -85,8 +86,8 @@ public class StatusBar extends JPanel {
     setPreferredSize(new Dimension(10, 23)); // 10, 23
 
     messageLabel = new JLabel();
-    messageLabel.setVerticalAlignment(JLabel.CENTER);
-    messageLabel.setVerticalTextPosition(JLabel.CENTER);
+    messageLabel.setVerticalAlignment(SwingConstants.CENTER);
+    messageLabel.setVerticalTextPosition(SwingConstants.CENTER);
     messageLabel.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
 
     initializeComponents();
@@ -127,7 +128,8 @@ public class StatusBar extends JPanel {
     return this.messageLabel;
   }
 
-  public void paint(Graphics g) {
+  @Override
+public void paint(Graphics g) {
     super.paint(g);
     if (drawShadow) {
       g.setColor(UIManager.getColor("Panel.background"));
@@ -152,7 +154,7 @@ public class StatusBar extends JPanel {
     if (cont instanceof Frame) {
       return (Frame) cont;
     } else {
-      return getParentFrame((Component) cont);
+      return getParentFrame(cont);
     }
   }
 
@@ -196,12 +198,12 @@ public class StatusBar extends JPanel {
 
     if (component instanceof JLabel) {
       JLabel label = (JLabel) component;
-      label.setVerticalAlignment(JLabel.CENTER);
-      label.setVerticalTextPosition(JLabel.CENTER);
+      label.setVerticalAlignment(SwingConstants.CENTER);
+      label.setVerticalTextPosition(SwingConstants.CENTER);
     }
 
     cPane.add(Box.createHorizontalStrut(5));
-    JSeparator separator = new JSeparator(JSeparator.VERTICAL);
+    JSeparator separator = new JSeparator(SwingConstants.VERTICAL);
     cPane.add(separator);
     cPane.add(Box.createHorizontalStrut(5));
     cPane.add(component);

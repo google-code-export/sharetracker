@@ -72,6 +72,7 @@ public class StStatusBar extends StatusBar {
 	/**
 	 * cleanup. remove the listeners
 	 */
+	@Override
 	protected void finalize() throws Throwable {
 		super.finalize();
 	}
