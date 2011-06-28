@@ -1,7 +1,6 @@
 package com.prem.share.dm;
 
 import com.prem.share.common.TransactionConstants;
-import com.prem.share.common.TransactionConstants.TransactionType;
 import com.prem.share.dm.db.EquityTransaction;
 
 public class Transaction extends EquityTransaction implements Cloneable {
@@ -87,6 +86,7 @@ public class Transaction extends EquityTransaction implements Cloneable {
 		transactionMode = mode;
 	}
 	
+	@Override
 	public Object clone() {
 		try {
 			return super.clone();
