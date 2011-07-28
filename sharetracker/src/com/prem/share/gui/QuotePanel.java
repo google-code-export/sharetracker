@@ -32,6 +32,7 @@ import com.prem.share.common.NseShareConstant;
 import com.prem.share.common.StStatusBar;
 import com.prem.share.dm.NseScriptQuote;
 import com.prem.share.dm.ScriptQuote;
+import com.prem.share.dm.db.EquityTransactionExample;
 
 public class QuotePanel extends JPanel {
 	/**
@@ -229,6 +230,7 @@ public class QuotePanel extends JPanel {
 	private class DeleteActionListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			/*
 			int selectedRow = quoteTable.getSelectedRow();
 			if (selectedRow != -1) {
 				int confirmation = GuiMessage.confirmationMessage(QuotePanel.this, GuiMessage.DELETE_QUOTE);
@@ -247,7 +249,9 @@ public class QuotePanel extends JPanel {
 			}
 			else {
 				GuiMessage.informationMessage(QuotePanel.this, GuiMessage.NO_SELECTION);
-			}
+			}*/
+			EquityTransactionExample equ = new EquityTransactionExample();
+			
 		}
 	}
 
