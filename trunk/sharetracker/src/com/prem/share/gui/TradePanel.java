@@ -33,6 +33,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
@@ -267,7 +268,9 @@ public class TradePanel extends javax.swing.JPanel {
     	sb.createCriteria().andNameEqualTo("Sharekhan");
     	
     	Resource resource = new FileSystemResource(
-    		"src/com/prem/share/dm/db/maps/spring-ibatis.xml");
+    		"sharetracker/sharetracker/src/com/prem/share/dm/db/maps/spring-ibatis.xml");
+//    	Resource classPathResource = new ClassPathResource(
+//		"spring-ibatis.xml");
     	BeanFactory beanFactory = new XmlBeanFactory(resource);
     	ShareBrokerDAOImpl share_brokerImpl = (ShareBrokerDAOImpl)beanFactory.getBean("share_broker");
     	List<ShareBroker> ls = share_brokerImpl.selectShareBrokerByExample(sb);
