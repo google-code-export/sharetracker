@@ -15,18 +15,18 @@
 		</jdbcConnection>
 
 		<javaModelGenerator targetPackage="com.prem.share.dm.db"
-			targetProject="ShareTracker">
+			targetProject="Share">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<sqlMapGenerator targetPackage="com.prem.share.dm.db.maps"
-			targetProject="ShareTracker">
+			targetProject="Share">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<daoGenerator type="SPRING" targetPackage="com.prem.share.dm.db.dao"
-			implementationPackage="com.prem.share.dm.db.dao.impl" targetProject="ShareTracker">
+			implementationPackage="com.prem.share.dm.db.dao.impl" targetProject="Share">
 			<property name="enableSubPackages" value="true" />
 			<property name="methodNameCalculator" value="extended" />
 		</daoGenerator>
