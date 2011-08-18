@@ -40,8 +40,11 @@ import org.springframework.core.io.Resource;
 import com.prem.share.common.GuiConstants;
 import com.prem.share.common.StStatusBar;
 import com.prem.share.dm.Transaction;
+import com.prem.share.dm.db.EquityTransaction;
+import com.prem.share.dm.db.EquityTransactionExample;
 import com.prem.share.dm.db.ShareBroker;
 import com.prem.share.dm.db.ShareBrokerExample;
+import com.prem.share.dm.db.dao.impl.EquityTransactionDAOImpl;
 import com.prem.share.dm.db.dao.impl.ShareBrokerDAOImpl;
 import com.prem.share.sharekhan.SharekhanHtmlParser;
 
@@ -264,14 +267,12 @@ public class TradePanel extends javax.swing.JPanel {
 	
 
     public static void main(String argv[]) {
+		Resource resource = new FileSystemResource(
+				"sharetracker/sharetracker/src/com/prem/share/dm/db/maps/spring-ibatis.xml");
+		BeanFactory beanFactory = new XmlBeanFactory(resource);
+    	
     	ShareBrokerExample sb = new ShareBrokerExample();
     	sb.createCriteria().andNameEqualTo("Sharekhan");
-    	
-    	Resource resource = new FileSystemResource(
-    		"sharetracker/sharetracker/src/com/prem/share/dm/db/maps/spring-ibatis.xml");
-//    	Resource classPathResource = new ClassPathResource(
-//		"spring-ibatis.xml");
-    	BeanFactory beanFactory = new XmlBeanFactory(resource);
     	ShareBrokerDAOImpl share_brokerImpl = (ShareBrokerDAOImpl)beanFactory.getBean("share_broker");
     	List<ShareBroker> ls = share_brokerImpl.selectShareBrokerByExample(sb);
 
@@ -279,6 +280,17 @@ public class TradePanel extends javax.swing.JPanel {
     		System.out.println("Name: " + ls.get(i).getId());
     		System.out.println("Name: " + ls.get(i).getName());
     		System.out.println("Name: " + ls.get(i).getDescription());
+    	}
+
+    	EquityTransactionExample eq = new EquityTransactionExample();
+//    	eq.createCriteria().and
+    	EquityTransactionDAOImpl eqTranImpl = (EquityTransactionDAOImpl)beanFactory.getBean("equity_transaction");
+    	List<EquityTransaction> eqList = eqTranImpl.selectEquityTransactionByExample(eq);
+
+    	for(int i =0 ; i<eqList.size(); i++) {
+    		System.out.println("Equity: " + eqList.get(i).getScriptScriptId());
+//    		System.out.println("Name: " + eqList.get(i).getName());
+//    		System.out.println("Name: " + eqList.get(i).getDescription());
     	}
     }
 }
