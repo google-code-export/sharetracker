@@ -35,6 +35,8 @@
 		<table tableName="share_broker" domainObjectName="ShareBroker" />
 		<table tableName="script" domainObjectName="Script" />
 		<table tableName="equity_transaction" domainObjectName="EquityTransaction" />
+		<table tableName="commodity" domainObjectName="Commodity" />
+		<table tableName="commodity_transaction" domainObjectName="CommodityTransaction" />
 		
 
 	</ibatorContext>
