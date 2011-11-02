@@ -37,6 +37,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
+import com.prem.share.common.DatabaseHandler;
 import com.prem.share.common.GuiConstants;
 import com.prem.share.common.StStatusBar;
 import com.prem.share.dm.Transaction;
@@ -264,33 +265,4 @@ public class TradePanel extends javax.swing.JPanel {
 			return value;
 		}
 	}
-	
-
-    public static void main(String argv[]) {
-		Resource resource = new FileSystemResource(
-				"sharetracker/sharetracker/src/com/prem/share/dm/db/maps/spring-ibatis.xml");
-		BeanFactory beanFactory = new XmlBeanFactory(resource);
-    	
-    	ShareBrokerExample sb = new ShareBrokerExample();
-    	sb.createCriteria().andNameEqualTo("Sharekhan");
-    	ShareBrokerDAOImpl share_brokerImpl = (ShareBrokerDAOImpl)beanFactory.getBean("share_broker");
-    	List<ShareBroker> ls = share_brokerImpl.selectShareBrokerByExample(sb);
-
-    	for(int i =0 ; i<ls.size(); i++) {
-    		System.out.println("Name: " + ls.get(i).getId());
-    		System.out.println("Name: " + ls.get(i).getName());
-    		System.out.println("Name: " + ls.get(i).getDescription());
-    	}
-
-    	EquityTransactionExample eq = new EquityTransactionExample();
-//    	eq.createCriteria().and
-    	EquityTransactionDAOImpl eqTranImpl = (EquityTransactionDAOImpl)beanFactory.getBean("equity_transaction");
-    	List<EquityTransaction> eqList = eqTranImpl.selectEquityTransactionByExample(eq);
-
-    	for(int i =0 ; i<eqList.size(); i++) {
-    		System.out.println("Equity: " + eqList.get(i).getScriptScriptId());
-//    		System.out.println("Name: " + eqList.get(i).getName());
-//    		System.out.println("Name: " + eqList.get(i).getDescription());
-    	}
-    }
 }
