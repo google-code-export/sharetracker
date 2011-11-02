@@ -35,4 +35,16 @@
         <property name="sqlMapClient"><ref local="sqlMapClient"/></property>
     </bean>
 
+    <bean id="commodity" 
+    class="com.prem.share.dm.db.dao.impl.CommodityDAOImpl">
+        <property name="dataSource"><ref local="dataSource"/></property>
+        <property name="sqlMapClient"><ref local="sqlMapClient"/></property>
+    </bean>
+
+    <bean id="commodity_transaction" 
+    class="com.prem.share.dm.db.dao.impl.CommodityTransactionDAOImpl">
+        <property name="dataSource"><ref local="dataSource"/></property>
+        <property name="sqlMapClient"><ref local="sqlMapClient"/></property>
+    </bean>
+
 </beans>
